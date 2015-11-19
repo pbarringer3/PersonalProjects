@@ -48,7 +48,9 @@ public class MileageCalculator {
 
         while(rows.hasNext()){
             Row currentRow = rows.next();
-            trips.add(new Trip(df.formatCellValue(currentRow.getCell(2)), rowNumber));
+            if(currentRow.getCell(0).getCellType()!=Cell.CELL_TYPE_BLANK) {
+                trips.add(new Trip(df.formatCellValue(currentRow.getCell(2)), rowNumber));
+            }
             rowNumber++;
         }
     }
