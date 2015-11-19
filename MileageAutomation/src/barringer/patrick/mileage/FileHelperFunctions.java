@@ -33,14 +33,12 @@ public class FileHelperFunctions {
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel 2007 or later", "xlsx");
         fileChooser.setFileFilter(filter);
-
-        while(true){
-            int fileChooserState = fileChooser.showOpenDialog(chooserParent);
-            if(fileChooserState == JFileChooser.APPROVE_OPTION){
-                chooserParent.dispose();
-                return fileChooser.getSelectedFile();
-            }
+        int fileChooserState = fileChooser.showOpenDialog(chooserParent);
+        if(fileChooserState == JFileChooser.APPROVE_OPTION){
+            chooserParent.dispose();
+            return fileChooser.getSelectedFile();
         }
+        throw new RuntimeException("You had to select a file for this program to function.");
     }
 
     public static XSSFWorkbook getWorkbook(String relativePath){
