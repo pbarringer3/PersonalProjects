@@ -4,8 +4,8 @@ package barringer.patrick.mileage;
  * Created by Patrick Barringer on 11/18/2015.
  */
 public class Leg {
-    public String  start;
-    public String end;
+    public final String  start;
+    public final String end;
 
     public Leg(String start, String end){
         this.start = start;

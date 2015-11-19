@@ -1,8 +1,6 @@
 package barringer.patrick.mileage;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -17,14 +15,13 @@ public class MileageCalculator {
     private static final String TRIPS_SHEET_NAME = "REIMBURSEMENT SHEET";
     private static final String TABLE_SHEET_NAME = "MILEAGE TABLE";
 
-    XSSFWorkbook workbook;
-    XSSFSheet tripsSheet;
+    private final XSSFSheet tripsSheet;
 
     private final MileageTable mileageTable;
     private List<Trip> trips;
 
     public MileageCalculator(XSSFWorkbook workbook){
-        this.workbook = workbook;
+        workbook.setForceFormulaRecalculation(true);
         XSSFSheet table = workbook.getSheet(TABLE_SHEET_NAME);
         mileageTable = new MileageTable(table);
         tripsSheet = workbook.getSheet(TRIPS_SHEET_NAME);
@@ -58,17 +55,20 @@ public class MileageCalculator {
     public void addMileageToWorkbook(){
         for(Trip trip : trips){
             double totalMileage = trip.getTotalDistance(mileageTable);
+            double deductionForHomeMileage = trip.getDeductionForHomeMileage(mileageTable);
+
             if(totalMileage==-1){
                 continue;
             }
             Row currentRow = tripsSheet.getRow(trip.getRow());
+            CellStyle cellStyle = currentRow.getCell(2).getCellStyle();
             Cell totalMileageCell = currentRow.createCell(9);
+            totalMileageCell.setCellStyle(cellStyle);
             Cell deductionForHomeMileageCell = currentRow.createCell(10);
-            Cell netMileageCell = currentRow.createCell(11);
+            deductionForHomeMileageCell.setCellStyle(cellStyle);
 
             totalMileageCell.setCellValue(totalMileage);
-            deductionForHomeMileageCell.setCellValue(trip.getDeductionForHomeMileage(mileageTable));
-            netMileageCell.setCellValue(trip.getDistanceNotIncludingHome(mileageTable));
+            deductionForHomeMileageCell.setCellValue(deductionForHomeMileage);
         }
     }
 }

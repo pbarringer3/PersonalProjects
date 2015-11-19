@@ -11,22 +11,6 @@ import java.util.Scanner;
  * Created by Patrick Barringer on 11/17/2015.
  */
 public class FileHelperFunctions {
-
-    public static String getPath(){
-        Scanner kbReader = new Scanner(System.in);
-        String path = "";
-
-        while(path.equals("")){
-            System.out.print("What is the name of your mileage file? ");
-            path = "data/"+kbReader.next();
-            if(!FileHelperFunctions.fileExists(path)){
-                path = "";
-                System.out.println("That is not a valid file in the data directory");
-            }
-        }
-        return path;
-    }
-
     public static File getFile(){
         JFrame chooserParent = new JFrame();
         JFileChooser fileChooser = new JFileChooser();
@@ -41,11 +25,6 @@ public class FileHelperFunctions {
         throw new RuntimeException("You had to select a file for this program to function.");
     }
 
-    public static XSSFWorkbook getWorkbook(String relativePath){
-        FileInputStream fileStream = getFileInputStreamFromFile(new File(relativePath));
-        return makeWorkbookFromFileStream(fileStream);
-    }
-
     public static XSSFWorkbook getWorkbook(File file){
         FileInputStream fileStream = getFileInputStreamFromFile(file);
         return makeWorkbookFromFileStream(fileStream);
@@ -55,7 +34,7 @@ public class FileHelperFunctions {
         try{
             return new FileInputStream(mileageSourceFile);
         } catch(FileNotFoundException e){
-            throw new RuntimeException("The input path to the Grades DB was not valid");
+            throw new RuntimeException("The input path to the File was not valid");
         }
     }
 
@@ -63,23 +42,8 @@ public class FileHelperFunctions {
         try{
             return new XSSFWorkbook(fis);
         } catch (IOException e) {
-            throw new RuntimeException("Could not create workbook from the input Grades DB");
+            throw new RuntimeException("Could not create workbook from the input File");
         }
-    }
-
-    public static boolean fileExists(String filename){
-        FileInputStream fs;
-        try{
-            fs = new FileInputStream(filename);
-        } catch (FileNotFoundException e) {
-            return false;
-        }
-        try{
-            fs.close();
-        } catch (IOException e) {
-            return true;
-        }
-        return true;
     }
 
     public static void writeFile(XSSFWorkbook workbook, File file){

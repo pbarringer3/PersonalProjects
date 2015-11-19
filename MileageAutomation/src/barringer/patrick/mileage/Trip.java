@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Trip {
     private static final String HOME = "H";
-    private int row;
+    private final int row;
     private List<Leg> legs;
 
     public Trip(String tripString, int rowNumber){
@@ -44,16 +44,6 @@ public class Trip {
         return total;
     }
 
-    public double getDistanceNotIncludingHome(MileageTable mileageTable){
-        double total = 0;
-        for(Leg leg : legs){
-            if(!leg.start.equals(HOME) && !leg.end.equals(HOME)) {
-                total += leg.getDistance(mileageTable);
-            }
-        }
-        return total;
-    }
-
     public double getDeductionForHomeMileage(MileageTable mileageTable){
         double total = 0;
         for(Leg leg : legs){
@@ -62,12 +52,6 @@ public class Trip {
             }
         }
         return total;
-    }
-
-    private void printArray(String[] toPrint){
-        for(String s : toPrint){
-            System.out.println("\""+s+"\"");
-        }
     }
 
     public int getRow(){

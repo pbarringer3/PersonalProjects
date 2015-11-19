@@ -81,13 +81,4 @@ public class MileageTable {
         }
         throw new RuntimeException("A destination was entered that is not in the table");
     }
-
-    private void printDistances(){
-        for (double[] distanceRow : distances) {
-            for (double distanceColumn : distanceRow) {
-                System.out.print(distanceColumn + "\t");
-            }
-            System.out.println();
-        }
-    }
 }
