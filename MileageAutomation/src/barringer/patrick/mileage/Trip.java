@@ -38,6 +38,9 @@ public class Trip {
         for(Leg leg : legs){
             total += leg.getDistance(mileageTable);
         }
+        if(legs.size()==0){
+            return -1;
+        }
         return total;
     }
 

@@ -57,13 +57,16 @@ public class MileageCalculator {
 
     public void addMileageToWorkbook(){
         for(Trip trip : trips){
+            double totalMileage = trip.getTotalDistance(mileageTable);
+            if(totalMileage==-1){
+                continue;
+            }
             Row currentRow = tripsSheet.getRow(trip.getRow());
             Cell totalMileageCell = currentRow.createCell(9);
             Cell deductionForHomeMileageCell = currentRow.createCell(10);
             Cell netMileageCell = currentRow.createCell(11);
 
-            double value = trip.getTotalDistance(mileageTable);
-            totalMileageCell.setCellValue(value);
+            totalMileageCell.setCellValue(totalMileage);
             deductionForHomeMileageCell.setCellValue(trip.getDeductionForHomeMileage(mileageTable));
             netMileageCell.setCellValue(trip.getDistanceNotIncludingHome(mileageTable));
         }
