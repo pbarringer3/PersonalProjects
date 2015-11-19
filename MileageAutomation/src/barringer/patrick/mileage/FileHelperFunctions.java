@@ -2,10 +2,9 @@ package barringer.patrick.mileage;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -26,6 +25,22 @@ public class FileHelperFunctions {
             }
         }
         return path;
+    }
+
+    public static File getFile(){
+        JFrame chooserParent = new JFrame();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel 2007 or later", "xlsx");
+        fileChooser.setFileFilter(filter);
+
+        while(true){
+            int fileChooserState = fileChooser.showOpenDialog(chooserParent);
+            if(fileChooserState == JFileChooser.APPROVE_OPTION){
+                chooserParent.dispose();
+                return fileChooser.getSelectedFile();
+            }
+        }
     }
 
     public static XSSFWorkbook getWorkbook(String relativePath){
@@ -67,5 +82,15 @@ public class FileHelperFunctions {
             return true;
         }
         return true;
+    }
+
+    public static void writeFile(XSSFWorkbook workbook, File file){
+        try{
+            FileOutputStream out = new FileOutputStream(file);
+            workbook.write(out);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
