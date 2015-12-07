@@ -1,0 +1,40 @@
+img,
+embed,
+object,
+video {
+    max-width: 100%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    color: #747704;
+    font-weight: 400;
+}
+
+hr {
+    height: 4px;
+    color: #BCBBBB;
+    background-color: #BCBBBB;
+}
+
+.text-muted {
+    color: #BCBBBB;
+}
+
+.text-thin {
+    font-weight: 100;
+}
+
+.text-light {
+    font-weight: 300;
+}
+
+.header-logo {
+    padding-top: 20px;
+    width: 100px;
+    height: auto;
+}
+
+.header-super {
+    font-size: 60px;
+}

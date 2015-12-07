@@ -13,6 +13,7 @@ public class Leg {
     }
 
     public double getDistance(MileageTable mileageTable){
-        return mileageTable.getDistance(start, end);
+        double distance = mileageTable.getDistance(start, end);
+        return distance;
     }
 }

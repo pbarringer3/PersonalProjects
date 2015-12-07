@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
+import javax.swing.*;
 import java.util.Iterator;
 
 /**
@@ -52,7 +53,7 @@ public class MileageTable {
     }
 
     private void addToLocations(Row currentRow, int rowCounter) {
-        locations[rowCounter] = currentRow.getCell(0).getStringCellValue();
+        locations[rowCounter] = currentRow.getCell(0).getStringCellValue().trim();
     }
 
     private void addToDistances(Row currentRow, int rowCounter) {
@@ -79,6 +80,7 @@ public class MileageTable {
                 return i;
             }
         }
+        FileHelperFunctions.sendMessage("'" + location + "' was not in the mileage table.");
         throw new RuntimeException("A destination was entered that is not in the table");
     }
 }

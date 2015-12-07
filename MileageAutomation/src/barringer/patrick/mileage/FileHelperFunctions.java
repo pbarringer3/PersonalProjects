@@ -55,4 +55,10 @@ public class FileHelperFunctions {
             e.printStackTrace();
         }
     }
+
+    public static void sendMessage(String message){
+        JFrame tempFrame = new JFrame();
+        JOptionPane.showMessageDialog(tempFrame, message);
+        tempFrame.dispose();
+    }
 }
