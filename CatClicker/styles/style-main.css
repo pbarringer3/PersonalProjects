@@ -1,0 +1,20 @@
+.row {
+    display: flex;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.fill-container {
+    width: 100%;
+}
+
+.centered {
+    text-align: center;
+    padding-top: 100%;
+}
