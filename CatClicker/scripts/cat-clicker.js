@@ -1,27 +1,31 @@
 /**
  * Created by Pat on 12/15/2015.
  */
-$(document).ready(function() {
-    var numCats = 2;
+var cats = ["Alfred", "Bob", "Cathy", "Doug", "Ender"];
+var clickCount = [];
 
-    for(var i=0; i<numCats; i++) {
-        $("body").append(
-            "<div class='row fill-container'>" +
-                "<div class='col-9'>" +
-                    "<img src='images/cat"+i+".jpg' alt='Cat "+i+" picture' class='fill-container' id='cat"+i+"'>" +
-                "</div>" +
-                "<div class='col-3'>" +
-                    "<div class='centered' id='counter"+i+"'>" +
-                        "0" +
-                    "</div>" +
-                "</div>" +
-            "</div>");
+$(document).ready(function() {
+    for(var i=0; i<cats.length; i++) {
+        clickCount.push(0);
+        $("#nameList").append("<li id='cat"+i+"'>"+cats[i]+"</li>");
     }
-    $("img").click(function(e) {
+    $("li").click(function() {
         var which = this.id.charAt(3);
-        var counter = $("#counter"+which);
-        var counterVal = parseInt(counter.text(),10);
-        counterVal++;
-        counter.text(counterVal);
+        displayCat(which);
     });
 });
+
+function displayCat(num) {
+    $("#catName").text(cats[num]);
+    var $catPic = $("#catPic");
+    $catPic.empty();
+    $catPic.append("<img id='catImg"+num+"' class='fill-container' src='images/cat"+num+".jpg' alt='A picture of my cat "+cats[num]+"'>");
+    $("#catImg"+num).click(incrementClickCount);
+    $("#counter").text(clickCount[num]);
+}
+
+function incrementClickCount() {
+    var index = this.id.charAt(6);
+    clickCount[index]++;
+    $("#counter").text(clickCount[index]);
+}

@@ -1,3 +1,11 @@
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-top: 1em;
+}
+
 .row {
     display: flex;
 }
@@ -6,8 +14,8 @@
     width: 25%;
 }
 
-.col-9 {
-    width: 75%;
+.col-6 {
+    width: 50%;
 }
 
 .fill-container {
@@ -16,5 +24,11 @@
 
 .centered {
     text-align: center;
-    padding-top: 100%;
+    padding-top: 100px;
+}
+
+#catName {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
 }
