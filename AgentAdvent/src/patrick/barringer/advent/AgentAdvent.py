@@ -63,18 +63,6 @@ def create_assignments_file(person):
         file.write(assignment+"\n")
     file.close()
 
-#     successful = False
-#     while not successful:
-#         outcome = attempt_drawing(results, hat)
-#         results = outcome(0)
-#         successful = outcome(1)
-#
-# def attempt_drawing(results, hat):
-#     for person in results:
-#         results[person](2).add(draw_name(results, person))
-#         results[person](2).add(draw_name(results, person))
-
-
 def get_restrictions_and_links(hat, row_num):
     restrictions = set()
     if hat['B'+str(row_num)].value is not None:

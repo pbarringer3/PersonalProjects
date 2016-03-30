@@ -4,7 +4,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
-import javax.swing.*;
 import java.util.Iterator;
 
 /**
@@ -17,11 +16,11 @@ public class MileageTable {
 
     public MileageTable(XSSFSheet table){
         this.table = table;
-        initializeLocalVariables();
+        initializeGlobalVariables();
         populateTable();
     }
 
-    private void initializeLocalVariables(){
+    private void initializeGlobalVariables(){
         int size = getTableSize();
         locations = new String[size];
         distances = new double[size][size];
@@ -50,10 +49,14 @@ public class MileageTable {
             addToDistances(currentRow, rowCounter);
             rowCounter++;
         }
+        System.out.println("There are "+rowCounter+" rows in the mileage table");
     }
 
     private void addToLocations(Row currentRow, int rowCounter) {
-        locations[rowCounter] = currentRow.getCell(0).getStringCellValue().trim();
+        Cell firstCell = currentRow.getCell(0);
+        String cellValue = firstCell.getStringCellValue().trim();
+        locations[rowCounter] = cellValue;
+        System.out.print("");
     }
 
     private void addToDistances(Row currentRow, int rowCounter) {
@@ -64,6 +67,7 @@ public class MileageTable {
             Cell currentCell = cellIterator.next();
             distances[rowCounter][columnCounter] = currentCell.getNumericCellValue();
             columnCounter++;
+            System.out.print("");
         }
     }
 

@@ -4,15 +4,14 @@
 var cats = ["Alfred", "Bob", "Cathy", "Doug", "Ender"];
 var clickCount = [];
 
-$(document).ready(function() {
-    for(var i=0; i<cats.length; i++) {
-        clickCount.push(0);
-        $("#nameList").append("<li id='cat"+i+"'>"+cats[i]+"</li>");
-    }
-    $("li").click(function() {
-        var which = this.id.charAt(3);
-        displayCat(which);
-    });
+for(var i=0; i<cats.length; i++) {
+    clickCount.push(0);
+    $("#nameList").append("<li id='cat"+i+"'>"+cats[i]+"</li>");
+}
+
+$("li").click(function() {
+    var which = this.id.charAt(3);
+    displayCat(which);
 });
 
 function displayCat(num) {
