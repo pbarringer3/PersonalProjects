@@ -2,7 +2,7 @@ from openpyxl import load_workbook
 from random import shuffle
 import os
 
-num_drawing = 2
+num_drawing = 1
 results = {}
 
 
@@ -24,6 +24,8 @@ def main():
 
     for person in results:
         create_assignments_file(person)
+		
+    print(results)
 
 def pick_names(hat):
     for person in results:
